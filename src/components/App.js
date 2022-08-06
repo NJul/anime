@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './App.css';
+import { AnimeList } from './AnimeList';
 
 function App() {
   const [search, setSearch] = useState('fairy');
@@ -10,7 +11,6 @@ function App() {
       `https://api.jikan.moe/v4/anime?q=${search}&limit=10`
     );
     const resData = await res.json();
-    // console.log(resData.data);
     setAnimeData(resData.data);
   };
 
@@ -28,6 +28,17 @@ function App() {
             placeholder='Search your anime'
             onChange={(e) => setSearch(e.target.value)}
           />
+        </div>
+      </div>
+
+      <div className='container'>
+        <div className='animeInfo'></div>
+
+        <div className='anime-row'>
+          <h2 className='text-heading'>Anime</h2>
+          <div className='row'>
+            <AnimeList animelist={animeData} />
+          </div>
         </div>
       </div>
     </>
