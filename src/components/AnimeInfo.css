@@ -1,3 +1,21 @@
 .anime-content {
-  padding: 16rem 0 0 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 80px 0;
+  padding: 40px;
+}
+
+.anime-content img {
+  width: 60px;
+}
+
+.info h3,
+.info h4 {
+  font-weight: normal;
+}
+
+.text-color {
+  color: #4d8d8d;
 }

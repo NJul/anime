@@ -54,3 +54,7 @@
 .card .anime-info {
   margin-top: 1rem;
 }
+
+.card:hover {
+  cursor: pointer;
+}
