@@ -48,6 +48,7 @@
 .card img {
   width: 80%;
   height: auto;
+  overflow: hidden;
 }
 
 .card .anime-info {
