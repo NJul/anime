@@ -1,12 +1,19 @@
 import React, { useEffect, useState } from 'react';
 import { AnimeList } from './AnimeList';
 import { AnimeInfo } from './AnimeInfo';
+import { AddToList } from './AddToList';
 import './App.css';
 
 function App() {
   const [search, setSearch] = useState('fairy');
   const [animeData, setAnimeData] = useState();
   const [animeInfo, setAnimeInfo] = useState();
+  const [myAnimeList, setMyAnimeList] = useState([]);
+
+  const addTo = (anime) => {
+    const newArray = [...myAnimeList, anime];
+    setMyAnimeList(newArray);
+  };
 
   const getData = async () => {
     const res = await fetch(
@@ -41,7 +48,22 @@ function App() {
         <div className='anime-row'>
           <h2 className='text-heading'>Anime</h2>
           <div className='row'>
-            <AnimeList animelist={animeData} setAnimeInfo={setAnimeInfo} />
+            <AnimeList
+              animelist={animeData}
+              setAnimeInfo={setAnimeInfo}
+              animeComponent={AddToList}
+              handleList={(anime) => addTo(anime)}
+            />
+          </div>
+
+          <h2 className='text-heading'>My List</h2>
+          <div className='row'>
+            <AnimeList
+              animelist={myAnimeList}
+              setAnimeInfo={setAnimeInfo}
+              animeComponent={AddToList}
+              handleList={(anime) => addTo(anime)}
+            />
           </div>
         </div>
       </div>

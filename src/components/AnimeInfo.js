@@ -20,9 +20,7 @@ export const AnimeInfo = (props) => {
   return (
     <div className='anime-content'>
       <h3>{title}</h3>
-      <br />
       {<img src={large_image_url} alt='animeImage' />}
-      <br />
       <div className='info'>
         <h3>
           <span className='text-color'>Rank:</span> {rank}
