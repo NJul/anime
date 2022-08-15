@@ -2,7 +2,6 @@ import React from 'react';
 import './AnimeInfo.css';
 
 export const AnimeInfo = (props) => {
-  console.log(props);
   const {
     title,
     images: {

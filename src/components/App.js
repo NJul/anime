@@ -3,6 +3,7 @@ import { AnimeList } from './AnimeList';
 import { AnimeInfo } from './AnimeInfo';
 import { AddToList } from './AddToList';
 import './App.css';
+import { RemoveFromList } from './RemoveFromList';
 
 function App() {
   const [search, setSearch] = useState('fairy');
@@ -11,7 +12,20 @@ function App() {
   const [myAnimeList, setMyAnimeList] = useState([]);
 
   const addTo = (anime) => {
-    const newArray = [...myAnimeList, anime];
+    const index = myAnimeList.findIndex((myanime) => {
+      return myanime.mal_id === anime.mal_id;
+    });
+
+    if (index < 0) {
+      const newArray = [...myAnimeList, anime];
+      setMyAnimeList(newArray);
+    }
+  };
+
+  const removeFrom = (anime) => {
+    const newArray = myAnimeList.filter((myanime) => {
+      return myanime.mal_id !== anime.mal_id;
+    });
     setMyAnimeList(newArray);
   };
 
@@ -61,8 +75,8 @@ function App() {
             <AnimeList
               animelist={myAnimeList}
               setAnimeInfo={setAnimeInfo}
-              animeComponent={AddToList}
-              handleList={(anime) => addTo(anime)}
+              animeComponent={RemoveFromList}
+              handleList={(anime) => removeFrom(anime)}
             />
           </div>
         </div>
