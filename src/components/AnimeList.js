@@ -2,7 +2,7 @@ import React from 'react';
 import './AnimeList.css';
 
 export const AnimeList = ({
-  animelist,
+  animeList,
   setAnimeInfo,
   animeComponent,
   handleList,
@@ -11,8 +11,8 @@ export const AnimeList = ({
 
   return (
     <>
-      {animelist
-        ? animelist.map((anime, index) => {
+      {animeList
+        ? animeList.map((anime, index) => {
             return (
               <div
                 className='card'

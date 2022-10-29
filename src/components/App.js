@@ -6,14 +6,18 @@ import './App.css';
 import { RemoveFromList } from './RemoveFromList';
 
 function App() {
+  const loadedMyAnimeList = localStorage.getItem('myAnimeList')
+    ? JSON.parse(localStorage.getItem('myAnimeList'))
+    : [];
+
   const [search, setSearch] = useState('fairy');
   const [animeData, setAnimeData] = useState();
   const [animeInfo, setAnimeInfo] = useState();
-  const [myAnimeList, setMyAnimeList] = useState([]);
+  const [myAnimeList, setMyAnimeList] = useState(loadedMyAnimeList);
 
   const addTo = (anime) => {
-    const index = myAnimeList.findIndex((myanime) => {
-      return myanime.mal_id === anime.mal_id;
+    const index = myAnimeList.findIndex((myAnime) => {
+      return myAnime.mal_id === anime.mal_id;
     });
 
     if (index < 0) {
@@ -41,6 +45,11 @@ function App() {
     getData();
   }, [search]);
 
+  useEffect(() => {
+    const json = JSON.stringify(myAnimeList);
+    window.localStorage.setItem('myAnimeList', json);
+  }, [myAnimeList]);
+
   return (
     <>
       <div className='header'>
@@ -63,7 +72,7 @@ function App() {
           <h2 className='text-heading'>Anime</h2>
           <div className='row'>
             <AnimeList
-              animelist={animeData}
+              animeList={animeData}
               setAnimeInfo={setAnimeInfo}
               animeComponent={AddToList}
               handleList={(anime) => addTo(anime)}
@@ -73,7 +82,7 @@ function App() {
           <h2 className='text-heading'>My List</h2>
           <div className='row'>
             <AnimeList
-              animelist={myAnimeList}
+              animeList={myAnimeList}
               setAnimeInfo={setAnimeInfo}
               animeComponent={RemoveFromList}
               handleList={(anime) => removeFrom(anime)}
