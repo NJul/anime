@@ -21,33 +21,49 @@ export const AnimeInfo = (props) => {
       <h3>{title}</h3>
       {<img src={large_image_url} alt='animeImage' />}
       <div className='info'>
-        <h3>
-          <span className='text-color'>Rank:</span> {rank}
-        </h3>
-        <h3>
-          <span className='text-color'>Rating:</span> {rating}
-        </h3>
-        <h3>
-          <span className='text-color'>Popularity:</span> {popularity}
-        </h3>
+        {rank && (
+          <h3>
+            <span className='text-color'>Rank:</span> {rank}
+          </h3>
+        )}
+        {rating && (
+          <h3>
+            <span className='text-color'>Rating:</span> {rating}
+          </h3>
+        )}
+        {popularity && (
+          <h3>
+            <span className='text-color'>Popularity:</span> {popularity}
+          </h3>
+        )}
         <br />
         <hr />
         <br />
-        <h4>
-          <span className='text-color'>Members:</span> {members}
-        </h4>
-        <h4>
-          <span className='text-color'>Source:</span> {source}
-        </h4>
-        <h4>
-          <span className='text-color'>Duration:</span> {duration}
-        </h4>
-        <h4>
-          <span className='text-color'>Status:</span> {status}
-        </h4>
-        <h4>
-          <span className='text-color'>Score:</span> {score}
-        </h4>
+        {members && (
+          <h4>
+            <span className='text-color'>Members:</span> {members}
+          </h4>
+        )}
+        {source && (
+          <h4>
+            <span className='text-color'>Source:</span> {source}
+          </h4>
+        )}
+        {duration && (
+          <h4>
+            <span className='text-color'>Duration:</span> {duration}
+          </h4>
+        )}
+        {status && (
+          <h4>
+            <span className='text-color'>Status:</span> {status}
+          </h4>
+        )}
+        {score && (
+          <h4>
+            <span className='text-color'>Score:</span> {score}
+          </h4>
+        )}
       </div>
     </div>
   );

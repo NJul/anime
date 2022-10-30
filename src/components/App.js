@@ -27,8 +27,8 @@ function App() {
   };
 
   const removeFrom = (anime) => {
-    const newArray = myAnimeList.filter((myanime) => {
-      return myanime.mal_id !== anime.mal_id;
+    const newArray = myAnimeList.filter((myAnime) => {
+      return myAnime.mal_id !== anime.mal_id;
     });
     setMyAnimeList(newArray);
   };
