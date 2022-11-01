@@ -1,4 +1,3 @@
-import React from 'react';
 import './AnimeInfo.css';
 
 export const AnimeInfo = (props) => {

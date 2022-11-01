@@ -1,4 +1,3 @@
-import React from 'react';
 import './AnimeList.css';
 
 export const AnimeList = ({

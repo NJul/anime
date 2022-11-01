@@ -1,13 +1,13 @@
-import React, { useEffect, useState } from 'react';
-import { AnimeList } from './AnimeList';
-import { AnimeInfo } from './AnimeInfo';
-import { AddToList } from './AddToList';
+import { useEffect, useState } from 'react';
+import { AnimeList } from './components/AnimeList';
+import { AnimeInfo } from './components/AnimeInfo';
+import { AddToList } from './components/AddToList';
+import { RemoveFromList } from './components/RemoveFromList';
 import './App.css';
-import { RemoveFromList } from './RemoveFromList';
 
 function App() {
   const loadedMyAnimeList = localStorage.getItem('myAnimeList')
-    ? JSON.parse(localStorage.getItem('myAnimeList'))
+    ? JSON.parse(localStorage.getItem('myAnimeList')!)
     : [];
 
   const [search, setSearch] = useState('fairy');

@@ -1,4 +1,3 @@
-import React from 'react';
 import './AddToList.css';
 
 export const AddToList = () => {
