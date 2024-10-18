@@ -26,7 +26,7 @@
 }
 
 .anime-row .text-heading {
-  margin-top: 1rem;
+  margin-top: 1.5rem;
   margin-bottom: 1rem;
   margin-left: 21rem;
 }
@@ -70,7 +70,7 @@
   text-align: justify;
   background-color: rgba(115, 197, 197, 0.9);
   border-radius: 10rem 3rem 0 0;
-  opacity: 0;
+  opacity: 0.2;
   transition: 0.5s;
 }
 
@@ -88,5 +88,5 @@
 }
 
 .title-overlay {
-  padding: 0.5rem 0 0.5rem 5rem;
+  padding: 0.8rem 0 0.5rem 5rem;
 }
