@@ -1,66 +1,40 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { AnimeList } from './components/AnimeList';
 import { AnimeInfo } from './components/AnimeInfo';
 import { AddToList } from './components/AddToList';
 import { RemoveFromList } from './components/RemoveFromList';
+import { SearchBox } from './components/SearchBox';
+import { useFetchAnime, useLocalStorage } from './hooks/hooks';
+import { Anime } from './types/animeTypes';
 import './App.css';
 
-function App() {
-  const loadedMyAnimeList = localStorage.getItem('myAnimeList')
-    ? JSON.parse(localStorage.getItem('myAnimeList')!)
-    : [];
+const App: React.FC = () => {
+  const [search, setSearch] = useState<string>('fairy');
+  const [myAnimeList, setMyAnimeList] = useLocalStorage<Anime[]>(
+    'myAnimeList',
+    []
+  );
+  const [animeInfo, setAnimeInfo] = useState<Anime | null>(null);
 
-  const [search, setSearch] = useState('fairy');
-  const [animeData, setAnimeData] = useState();
-  const [animeInfo, setAnimeInfo] = useState();
-  const [myAnimeList, setMyAnimeList] = useState(loadedMyAnimeList);
+  const { animeData, loading, error } = useFetchAnime(search);
 
-  const addTo = (anime) => {
-    const index = myAnimeList.findIndex((myAnime) => {
-      return myAnime.mal_id === anime.mal_id;
-    });
-
-    if (index < 0) {
-      const newArray = [...myAnimeList, anime];
-      setMyAnimeList(newArray);
+  const addTo = (anime: Anime) => {
+    if (!myAnimeList.some(myAnime => myAnime.mal_id === anime.mal_id)) {
+      setMyAnimeList(prevList => [...prevList, anime]);
     }
   };
 
-  const removeFrom = (anime) => {
-    const newArray = myAnimeList.filter((myAnime) => {
-      return myAnime.mal_id !== anime.mal_id;
-    });
-    setMyAnimeList(newArray);
-  };
-
-  const getData = async () => {
-    const res = await fetch(
-      `https://api.jikan.moe/v4/anime?q=${search}&limit=10`
+  const removeFrom = (anime: Anime) => {
+    setMyAnimeList(prevList =>
+      prevList.filter(myAnime => myAnime.mal_id !== anime.mal_id)
     );
-    const resData = await res.json();
-    setAnimeData(resData.data);
   };
-
-  useEffect(() => {
-    getData();
-  }, [search]);
-
-  useEffect(() => {
-    const json = JSON.stringify(myAnimeList);
-    window.localStorage.setItem('myAnimeList', json);
-  }, [myAnimeList]);
 
   return (
     <>
       <div className='header'>
         <h1>My Anime List</h1>
-        <div className='search-box'>
-          <input
-            type='search'
-            placeholder='Search your anime'
-            onChange={(e) => setSearch(e.target.value)}
-          />
-        </div>
+        <SearchBox setSearch={setSearch} />
       </div>
 
       <div className='container'>
@@ -71,12 +45,18 @@ function App() {
         <div className='anime-row'>
           <h2 className='text-heading'>Anime</h2>
           <div className='row'>
-            <AnimeList
-              animeList={animeData}
-              setAnimeInfo={setAnimeInfo}
-              animeComponent={AddToList}
-              handleList={(anime) => addTo(anime)}
-            />
+            {loading ? (
+              <p>Loading...</p>
+            ) : error ? (
+              <p>Error: {error}</p>
+            ) : (
+              <AnimeList
+                animeList={animeData}
+                setAnimeInfo={setAnimeInfo}
+                animeComponent={AddToList}
+                handleList={addTo}
+              />
+            )}
           </div>
 
           <h2 className='text-heading'>My List</h2>
@@ -85,13 +65,13 @@ function App() {
               animeList={myAnimeList}
               setAnimeInfo={setAnimeInfo}
               animeComponent={RemoveFromList}
-              handleList={(anime) => removeFrom(anime)}
+              handleList={removeFrom}
             />
           </div>
         </div>
       </div>
     </>
   );
-}
+};
 
 export default App;
