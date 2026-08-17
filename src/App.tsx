@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { AnimeList } from './components/AnimeList';
 import { AnimeInfo } from './components/AnimeInfo';
 import { AddToList } from './components/AddToList';
@@ -9,14 +9,24 @@ import { Anime } from './types/animeTypes';
 import './App.css';
 
 const App: React.FC = () => {
-  const [search, setSearch] = useState<string>('fairy');
+  // По умолчанию поиск пустой.
+  // Это предотвращает автоматический запрос к Jikan
+  // сразу после открытия приложения.
+  const [search, setSearch] = useState<string>('');
+
   const [myAnimeList, setMyAnimeList] = useLocalStorage<Anime[]>(
     'myAnimeList',
     []
   );
+
   const [animeInfo, setAnimeInfo] = useState<Anime | null>(null);
 
   const { animeData, loading, error } = useFetchAnime(search);
+
+  // При новом поиске очищаем ранее выбранное аниме.
+  useEffect(() => {
+    setAnimeInfo(null);
+  }, [search]);
 
   const addTo = (anime: Anime) => {
     if (!myAnimeList.some(myAnime => myAnime.mal_id === anime.mal_id)) {
@@ -34,6 +44,7 @@ const App: React.FC = () => {
     <>
       <div className='header'>
         <h1>My Anime List</h1>
+
         <SearchBox setSearch={setSearch} />
       </div>
 
@@ -44,8 +55,11 @@ const App: React.FC = () => {
 
         <div className='anime-row'>
           <h2 className='text-heading'>Anime</h2>
+
           <div className='row'>
-            {loading ? (
+            {!search.trim() ? (
+              <p>Enter an anime name to search.</p>
+            ) : loading ? (
               <p>Loading...</p>
             ) : error ? (
               <p>Error: {error}</p>
@@ -60,6 +74,7 @@ const App: React.FC = () => {
           </div>
 
           <h2 className='text-heading'>My List</h2>
+
           <div className='row'>
             <AnimeList
               animeList={myAnimeList}

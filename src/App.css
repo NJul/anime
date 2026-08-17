@@ -2,21 +2,323 @@
   position: fixed;
   top: 0;
   z-index: 10;
+
   display: flex;
   justify-content: space-around;
   align-items: center;
+
   width: 100%;
-  height: 80px;
+  min-height: 80px;
+  padding: 0 20px;
+
+  box-sizing: border-box;
+
   color: white;
   background-color: #4cb5b5;
 }
 
+.header h1 {
+  margin: 0;
+}
+
+.header .search-box {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
 .header .search-box input {
-  width: 350px;
+  width: min(350px, 45vw);
+  min-width: 0;
   height: 30px;
+
   padding: 0 1rem;
+
   font-size: 1.2rem;
+
   border: none;
   border-radius: 5px;
   outline: none;
+
+  box-sizing: border-box;
+}
+
+.header .search-box input:focus {
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.5);
+}
+
+.header .search-box button {
+  flex-shrink: 0;
+
+  height: 30px;
+  padding: 0 15px;
+
+  font-size: 1rem;
+
+  color: white;
+  background-color: #3d9999;
+
+  border: none;
+  border-radius: 5px;
+
+  cursor: pointer;
+
+  transition:
+    background-color 0.2s ease,
+    transform 0.1s ease;
+}
+
+.header .search-box button:hover {
+  background-color: #338888;
+}
+
+.header .search-box button:active {
+  transform: translateY(1px);
+}
+
+@media (max-width: 700px) {
+  .header {
+    flex-direction: column;
+    justify-content: center;
+    gap: 10px;
+
+    min-height: 110px;
+    padding: 10px 15px;
+  }
+
+  .header h1 {
+    font-size: 1.6rem;
+  }
+
+  .header .search-box {
+    width: 100%;
+  }
+
+  .header .search-box input {
+    width: 100%;
+    max-width: 350px;
+
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 420px) {
+  .header {
+    padding: 10px;
+  }
+
+  .header h1 {
+    font-size: 1.4rem;
+  }
+
+  .header .search-box {
+    gap: 5px;
+  }
+
+  .header .search-box input {
+    width: 100%;
+    font-size: 0.95rem;
+    padding: 0 0.75rem;
+  }
+
+  .header .search-box button {
+    padding: 0 10px;
+    font-size: 0.9rem;
+  }
+}
+
+/* =========================================================
+   GENERAL MODERN LOOK
+   ========================================================= */
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+
+  min-width: 320px;
+
+  font-family: 'Josefin Sans', sans-serif;
+
+  color: #202020;
+
+  background:
+    radial-gradient(
+      circle at top right,
+      rgba(76, 181, 181, 0.08),
+      transparent 30%
+    ),
+    #f9f6ee;
+
+  overflow-x: hidden;
+}
+
+/* =========================================================
+   HEADER
+   ========================================================= */
+
+.header {
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.12);
+
+  background: linear-gradient(135deg, #4cb5b5 0%, #52bebe 55%, #43a9a9 100%);
+
+  backdrop-filter: blur(8px);
+}
+
+.header h1 {
+  letter-spacing: 0.5px;
+
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.12);
+}
+
+/* =========================================================
+   SEARCH
+   ========================================================= */
+
+.header .search-box input {
+  height: 38px;
+
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+
+  transition:
+    box-shadow 0.25s ease,
+    transform 0.2s ease;
+}
+
+.header .search-box input:focus {
+  transform: translateY(-1px);
+
+  box-shadow:
+    0 4px 14px rgba(0, 0, 0, 0.16),
+    0 0 0 2px rgba(255, 255, 255, 0.35);
+}
+
+.header .search-box button {
+  height: 38px;
+
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.12);
+}
+
+.header .search-box button:hover {
+  transform: translateY(-1px);
+
+  box-shadow: 0 5px 12px rgba(0, 0, 0, 0.16);
+}
+
+/* =========================================================
+   MAIN HEADINGS
+   ========================================================= */
+
+.anime-row .text-heading {
+  position: relative;
+
+  display: inline-flex;
+  align-items: center;
+
+  width: fit-content;
+
+  padding: 7px 16px;
+
+  margin-top: 1.5rem;
+
+  color: #2f4f4f;
+
+  font-size: 1.35rem;
+
+  background-color: rgba(76, 181, 181, 0.1);
+
+  border-left: 4px solid #4cb5b5;
+
+  border-radius: 0 8px 8px 0;
+}
+
+/* =========================================================
+   ANIME INFO PANEL
+   ========================================================= */
+
+.animeInfo {
+  box-shadow: 3px 0 15px rgba(0, 0, 0, 0.06);
+
+  border-right: 1px solid rgba(76, 181, 181, 0.12);
+}
+
+/* =========================================================
+   CARDS
+   ========================================================= */
+
+.card {
+  border-radius: 10px;
+
+  box-shadow: 0 5px 14px rgba(0, 0, 0, 0.12);
+
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+
+  box-shadow: 0 10px 22px rgba(0, 0, 0, 0.18);
+}
+
+.card img {
+  border-radius: 5px;
+
+  transition: transform 0.3s ease;
+}
+
+.card:hover img {
+  transform: scale(1.02);
+}
+
+/* =========================================================
+   NOT FOUND / EMPTY STATE
+   ========================================================= */
+
+.not-found {
+  padding: 15px 18px;
+
+  color: #666;
+
+  background-color: rgba(76, 181, 181, 0.08);
+
+  border-radius: 8px;
+}
+
+/* =========================================================
+   SCROLLBARS
+   ========================================================= */
+
+.animeInfo::-webkit-scrollbar,
+.overlay .synopsis::-webkit-scrollbar {
+  width: 7px;
+}
+
+.animeInfo::-webkit-scrollbar-thumb,
+.overlay .synopsis::-webkit-scrollbar-thumb {
+  background-color: rgba(76, 181, 181, 0.6);
+
+  border-radius: 10px;
+}
+
+.animeInfo::-webkit-scrollbar-track,
+.overlay .synopsis::-webkit-scrollbar-track {
+  background-color: rgba(0, 0, 0, 0.04);
+}
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 600px) {
+  .anime-row .text-heading {
+    font-size: 1.15rem;
+  }
 }

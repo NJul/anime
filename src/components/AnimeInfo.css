@@ -1,22 +1,227 @@
+/* =========================================================
+   ANIME INFO
+   ========================================================= */
+
 .anime-content {
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
-  margin: 80px 0;
-  padding: 40px;
+
+  width: 100%;
+
+  padding: 25px 20px;
+
+  box-sizing: border-box;
 }
+
+/* =========================================================
+   TITLE
+   ========================================================= */
+
+.anime-content h3 {
+  width: 100%;
+
+  margin: 0 0 18px;
+
+  color: #2f4f4f;
+
+  font-size: 1.3rem;
+  font-weight: 700;
+
+  line-height: 1.3;
+
+  text-align: center;
+
+  overflow-wrap: break-word;
+}
+
+/* =========================================================
+   IMAGE
+   ========================================================= */
 
 .anime-content img {
-  width: 60px;
-  padding: 1rem 0 1rem 0;
+  display: block;
+
+  width: 180px;
+  max-width: 100%;
+  height: 260px;
+
+  object-fit: cover;
+
+  margin-bottom: 22px;
+
+  background-color: #ffffff;
+
+  border: 3px solid rgba(76, 181, 181, 0.2);
+  border-radius: 10px;
+
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
 }
 
-.info h3,
-.info h4 {
-  font-weight: normal;
+.anime-content img:hover {
+  transform: translateY(-3px);
+
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.18);
 }
+
+/* =========================================================
+   IMAGE PLACEHOLDER
+   ========================================================= */
+
+.image-placeholder {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 180px;
+  height: 260px;
+
+  margin-bottom: 22px;
+
+  padding: 15px;
+
+  box-sizing: border-box;
+
+  color: #777;
+
+  text-align: center;
+
+  background-color: #eeeeee;
+
+  border: 3px solid rgba(76, 181, 181, 0.15);
+  border-radius: 10px;
+}
+
+/* =========================================================
+   INFO
+   ========================================================= */
+
+.info {
+  width: 100%;
+  max-width: 280px;
+}
+
+/* Каждая характеристика */
+.info h4 {
+  display: block;
+
+  margin: 0;
+
+  padding: 9px 0;
+
+  color: #333;
+
+  font-size: 0.95rem;
+  font-weight: normal;
+
+  line-height: 1.4;
+
+  border-bottom: 1px solid rgba(76, 181, 181, 0.14);
+}
+
+/* Последняя характеристика без линии */
+.info h4:last-child {
+  border-bottom: none;
+}
+
+/* =========================================================
+   LABEL
+   ========================================================= */
 
 .text-color {
   color: #4d8d8d;
+
+  font-weight: 700;
+}
+
+/* =========================================================
+   SEPARATOR
+   ========================================================= */
+
+.info hr {
+  height: 1px;
+
+  margin: 10px 0;
+
+  border: 0;
+
+  background: linear-gradient(
+    to right,
+    transparent,
+    rgba(76, 181, 181, 0.4),
+    transparent
+  );
+}
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (max-width: 900px) {
+  .anime-content {
+    padding: 20px;
+  }
+
+  .anime-content h3 {
+    font-size: 1.2rem;
+  }
+
+  .anime-content img {
+    width: 150px;
+    height: 220px;
+  }
+
+  .image-placeholder {
+    width: 150px;
+    height: 220px;
+  }
+
+  .info {
+    max-width: 500px;
+  }
+}
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 600px) {
+  .anime-content {
+    padding: 15px;
+  }
+
+  .anime-content h3 {
+    margin-bottom: 14px;
+
+    font-size: 1.1rem;
+  }
+
+  .anime-content img {
+    width: 130px;
+    height: 190px;
+
+    margin-bottom: 18px;
+  }
+
+  .image-placeholder {
+    width: 130px;
+    height: 190px;
+
+    margin-bottom: 18px;
+  }
+
+  .info {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .info h4 {
+    padding: 8px 0;
+
+    font-size: 0.9rem;
+  }
 }

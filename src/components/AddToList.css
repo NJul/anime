@@ -1,9 +1,44 @@
 .my-list {
   position: absolute;
   right: 15px;
-  bottom: 1px;
-  padding: 0.5rem;
+  bottom: 10px;
+
+  padding: 8px 12px;
+
   font-size: 1rem;
   font-weight: bold;
-  background-color: rgba(115, 197, 197, 0.9);
+
+  color: #ffffff;
+  background-color: rgba(76, 181, 181, 0.9);
+
+  border-radius: 5px;
+
+  cursor: pointer;
+
+  transition:
+    background-color 0.2s ease,
+    transform 0.1s ease;
+}
+
+.my-list:hover {
+  background-color: rgba(61, 153, 153, 0.95);
+}
+
+.my-list:active {
+  transform: translateY(1px);
+}
+
+.my-list p {
+  margin: 0;
+}
+
+@media (max-width: 500px) {
+  .my-list {
+    right: 8px;
+    bottom: 8px;
+
+    padding: 6px 9px;
+
+    font-size: 0.9rem;
+  }
 }

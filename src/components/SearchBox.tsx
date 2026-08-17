@@ -1,15 +1,30 @@
+import { useState } from 'react';
+
 interface SearchBoxProps {
   setSearch: (value: string) => void;
 }
 
 export const SearchBox: React.FC<SearchBoxProps> = ({ setSearch }) => {
+  const [value, setValue] = useState('');
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    const trimmedValue = value.trim();
+
+    setSearch(trimmedValue);
+  };
+
   return (
-    <div className='search-box'>
+    <form className='search-box' onSubmit={handleSubmit}>
       <input
         type='search'
+        value={value}
         placeholder='Search your anime'
-        onChange={e => setSearch(e.target.value)}
+        onChange={e => setValue(e.target.value)}
       />
-    </div>
+
+      <button type='submit'>Search</button>
+    </form>
   );
 };

@@ -1,7 +1,11 @@
 export const RemoveFromList: React.FC = () => {
   return (
-    <div className="my-list">
-      <p>Remove From List -</p>
-    </div>
+    <button
+      type='button'
+      className='my-list'
+      aria-label='Remove anime from my list'
+    >
+      Remove From List -
+    </button>
   );
 };

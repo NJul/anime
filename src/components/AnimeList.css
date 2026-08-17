@@ -1,92 +1,435 @@
+/* =========================================================
+   CONTAINER
+   ========================================================= */
+
 .container {
   display: flex;
+
   width: 100%;
-  margin: 100px auto;
+  min-height: calc(100vh - 100px);
+
+  margin: 100px auto 0;
+
+  box-sizing: border-box;
 }
+
+/* =========================================================
+   LEFT ANIME INFO
+   ========================================================= */
 
 .animeInfo {
   position: fixed;
-  top: 0;
+
+  top: 80px;
   left: 0;
   z-index: 9;
+
   width: 320px;
-  height: 100%;
+  height: calc(100vh - 80px);
+
+  padding: 20px;
+
+  box-sizing: border-box;
+
+  overflow-y: auto;
+
   background-color: #f9f6ee;
 }
+
+/* =========================================================
+   ANIME ROW
+   ========================================================= */
 
 .anime-row {
   display: flex;
   flex-direction: column;
+
+  width: 100%;
+
+  padding-left: 340px;
+  padding-right: 20px;
+
+  box-sizing: border-box;
 }
 
 .anime-row .row {
-  display: inline-flex;
+  display: flex;
+  flex-wrap: wrap;
+
   gap: 20px;
-  margin-left: 20rem;
 }
 
 .anime-row .text-heading {
-  margin-top: 1.5rem;
-  margin-bottom: 1rem;
-  margin-left: 21rem;
+  margin: 1.5rem 0 1rem;
 }
+
+/* =========================================================
+   CARD
+   ========================================================= */
 
 .card {
   position: relative;
+
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+
   width: 230px;
+  min-width: 230px;
   height: 300px;
-  padding: 0 0 1rem 0;
+
+  padding: 0 0 1rem;
+
+  box-sizing: border-box;
+
   text-align: center;
+
+  background-color: #ffffff;
+
   box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.3);
-  overflow: hidden;
-}
 
-.card img {
-  width: 80%;
-  height: auto;
   overflow: hidden;
-}
 
-.card .anime-info {
-  margin-top: 1rem;
-  margin-bottom: 1.5rem;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
 }
 
 .card:hover {
   cursor: pointer;
+
+  transform: translateY(-3px);
+
+  box-shadow: 6px 8px 12px rgba(0, 0, 0, 0.3);
 }
+
+/* =========================================================
+   CARD IMAGE
+   ========================================================= */
+
+.card img {
+  display: block;
+
+  width: 80%;
+  height: 210px;
+
+  object-fit: cover;
+}
+
+/* =========================================================
+   CARD TITLE
+   ========================================================= */
+
+.card .anime-info {
+  width: 100%;
+
+  margin-top: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.card .anime-info > h4 {
+  margin: 0 10px;
+
+  overflow: hidden;
+
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* =========================================================
+   GREEN OVERLAY / CURTAIN
+   ========================================================= */
 
 .overlay {
   position: absolute;
+
+  top: 0;
+  right: 0;
   bottom: 0;
-  left: -1.6rem;
+  left: 0;
+
+  display: flex;
+  flex-direction: column;
+
   width: 100%;
   height: 0;
+
   padding: 1rem;
-  text-align: justify;
-  background-color: rgba(115, 197, 197, 0.9);
-  border-radius: 10rem 3rem 0 0;
-  opacity: 0.2;
-  transition: 0.5s;
+
+  box-sizing: border-box;
+
+  background-color: rgba(115, 197, 197, 0.95);
+
+  /*
+   * Только левый верхний угол скруглён.
+   * Правый верхний угол полностью прямой.
+   */
+  border-radius: 10rem 0 0 0;
+
+  opacity: 0;
+
+  overflow: hidden;
+
+  transition:
+    height 0.5s ease,
+    opacity 0.5s ease;
 }
 
 .anime-info:hover .overlay {
+  height: 100%;
   opacity: 1;
-  height: 90%;
 }
+
+/* =========================================================
+   ANIME TITLE INSIDE OVERLAY
+   ========================================================= */
+
+.overlay > .title-overlay:first-child {
+  flex-shrink: 0;
+
+  width: 68%;
+  max-width: 155px;
+
+  margin: 8px auto 0;
+
+  padding: 0 0.3rem 0.5rem;
+
+  box-sizing: border-box;
+
+  text-align: center;
+
+  line-height: 1.25;
+
+  overflow-wrap: break-word;
+  word-break: normal;
+}
+
+/* =========================================================
+   SYNOPSIS TITLE
+   ========================================================= */
+
+.overlay > h3.title-overlay {
+  flex-shrink: 0;
+
+  width: 100%;
+  max-width: 100%;
+
+  margin: 0 0 0.5rem;
+
+  padding: 0;
+
+  box-sizing: border-box;
+
+  text-align: center;
+
+  line-height: 1.2;
+
+  font-size: 1.1rem;
+}
+
+/* =========================================================
+   SYNOPSIS
+   ========================================================= */
 
 .overlay .synopsis {
-  width: 80%;
-  height: 50%;
-  margin: 0 auto;
-  padding: 0 1rem 0 1rem;
-  overflow: auto;
+  flex: 1;
+
+  width: 100%;
+  min-height: 0;
+
+  margin: 0;
+
+  padding: 0 0.5rem;
+
+  box-sizing: border-box;
+
+  overflow-y: auto;
+  overflow-x: hidden;
 }
 
-.title-overlay {
-  padding: 0.8rem 0 0.5rem 5rem;
+.synopsis p {
+  margin: 0;
+
+  line-height: 1.4;
+
+  overflow-wrap: anywhere;
+  word-break: normal;
+}
+
+/* =========================================================
+   ADD / REMOVE BUTTON
+   ========================================================= */
+
+.overlay .my-list {
+  position: static;
+
+  flex-shrink: 0;
+
+  align-self: flex-end;
+
+  margin-top: 10px;
+}
+
+/* =========================================================
+   NOT FOUND
+   ========================================================= */
+
+.not-found {
+  margin: 20px 0;
+}
+
+/* =========================================================
+   LARGE TABLET
+   ========================================================= */
+
+@media (max-width: 1100px) {
+  .animeInfo {
+    width: 280px;
+  }
+
+  .anime-row {
+    padding-left: 300px;
+  }
+
+  .overlay > .title-overlay:first-child {
+    width: 70%;
+    max-width: 160px;
+
+    margin-top: 8px;
+  }
+}
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (max-width: 900px) {
+  .container {
+    flex-direction: column;
+  }
+
+  .animeInfo {
+    position: static;
+
+    width: 100%;
+    height: auto;
+
+    padding: 20px;
+  }
+
+  .anime-row {
+    padding: 20px;
+  }
+
+  .anime-row .row {
+    justify-content: center;
+  }
+
+  .overlay > .title-overlay:first-child {
+    width: 76%;
+    max-width: 180px;
+
+    margin-top: 6px;
+  }
+
+  /*
+   * Правый верхний угол остаётся прямым.
+   */
+  .overlay {
+    border-radius: 9rem 0 0 0;
+  }
+}
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 600px) {
+  .container {
+    margin-top: 120px;
+  }
+
+  .anime-row {
+    padding: 10px;
+  }
+
+  .anime-row .row {
+    gap: 15px;
+  }
+
+  .card {
+    width: calc(50% - 8px);
+
+    min-width: 0;
+
+    height: 280px;
+  }
+
+  .card img {
+    width: 80%;
+    height: 190px;
+  }
+
+  .overlay {
+    padding: 0.8rem;
+
+    /*
+     * Сохраняем асимметрию:
+     * левый верхний угол скруглён,
+     * правый верхний прямой.
+     */
+    border-radius: 8rem 0 0 0;
+  }
+
+  .overlay > .title-overlay:first-child {
+    width: 82%;
+    max-width: 200px;
+
+    margin-top: 3px;
+
+    padding: 0.15rem 0.3rem 0.4rem;
+
+    font-size: 0.9rem;
+  }
+
+  .overlay > h3.title-overlay {
+    margin-bottom: 0.4rem;
+
+    font-size: 0.9rem;
+  }
+
+  .overlay .synopsis {
+    padding: 0 0.4rem;
+
+    font-size: 0.85rem;
+  }
+
+  .card:focus .overlay,
+  .card:active .overlay {
+    height: 100%;
+    opacity: 1;
+  }
+}
+
+/* =========================================================
+   VERY SMALL MOBILE
+   ========================================================= */
+
+@media (max-width: 400px) {
+  .card {
+    width: 100%;
+    max-width: 280px;
+
+    margin: 0 auto;
+  }
+
+  .overlay {
+    border-radius: 7rem 0 0 0;
+  }
+
+  .overlay > .title-overlay:first-child {
+    width: 85%;
+    max-width: 220px;
+  }
 }
